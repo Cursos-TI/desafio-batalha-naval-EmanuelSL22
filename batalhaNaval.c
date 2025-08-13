@@ -32,7 +32,7 @@ if (colunaH + 3 <= 10)
   {
    for (int a = 0; a < 3; a++)
    {
-     printf("Navio %c%d\n", vertical[linhaH], horizontal[colunaH +a]);
+     printf("Navio Horizontal: %c%d\n", vertical[linhaH], horizontal[colunaH +a]);
      Tabuleiro[linhaH][colunaH + a] = 3;
    }
    
