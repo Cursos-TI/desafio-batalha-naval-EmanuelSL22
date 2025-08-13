@@ -5,6 +5,74 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
+
+    int Tabuleiro[10][10] = {0};
+   int navio = 3;
+   char vertical[10] = {'A','B','C','D','E','F','G','H','I','J'};
+   int horizontal[10] = {1,2,3,4,5,6,7,8,9,10};
+   int linhaV, colunaV;
+   int linhaH, colunaH;
+   int sobreposicao = 0;
+
+   //coodernadas dos navios
+   linhaH = 1;
+   colunaH = 3;
+
+   linhaV = 4;
+   colunaV = 6;
+
+   //posição Horizontal do navio
+   for (int i = 0; i < 10; i++)
+   {
+     printf("\t%d", horizontal[i]);
+   }
+
+
+if (colunaH + 3 <= 10)
+  {
+   for (int a = 0; a < 3; a++)
+   {
+     Tabuleiro[linhaH][colunaH + a] = 3;
+   }
+   
+  } else {
+    printf("Navio fora dos limites!\n");
+  }
+
+  //posição Vertical do navio
+  if (linhaV + 3 <= 10)
+  {
+    for (int a = 0; a < 3; a++)
+    {
+      if (Tabuleiro[linhaV + a][colunaV] != 0)
+      {
+        sobreposicao = 1;
+      }
+      
+    } 
+    if(sobreposicao == 0)
+  {
+      for (int a = 0; a < 3; a++)
+      {
+        Tabuleiro[linhaV + a][colunaV] = 3;
+      } 
+    
+  } else {
+    printf("Navio fora dos limites!\n");
+  } 
+  }
+
+
+  for (int i = 0; i < 10; i++)
+   {
+    printf("\n%c", vertical[i]);
+    for (int k = 0; k < 10; k++)
+    {
+      printf("\t%d", Tabuleiro[i][k]);//imprime o tabuleiro com 0 como água
+      
+    }
+   }
+
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
