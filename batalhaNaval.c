@@ -12,6 +12,8 @@ int main() {
    int horizontal[10] = {1,2,3,4,5,6,7,8,9,10};
    int linhaV, colunaV;
    int linhaH, colunaH;
+   int linhaD1, colunaD1;
+   int linhaD2, colunaD2;
    int sobreposicao = 0;
 
    //coodernadas dos navios
@@ -20,6 +22,13 @@ int main() {
 
    linhaV = 4;
    colunaV = 6;
+
+   linhaD1 = 2;
+   colunaD1 = 2;
+
+   linhaD2 = 5;
+   colunaD2 = 2;
+
 
    //posição Horizontal do navio
    for (int i = 0; i < 10; i++)
@@ -63,6 +72,52 @@ if (colunaH + 3 <= 10)
     printf("Navio fora dos limites!\n");
   } 
   }
+
+  // Navio diagonal 1 (principal)
+    sobreposicao = 0;
+    if (linhaD1 + 3 <= 10) {
+        if (colunaD1 + 3 <= 10) {
+            for (int a = 0; a < 3; a++) {
+                if (Tabuleiro[linhaD1 + a][colunaD2 + a] != 0) {
+                    sobreposicao = 1;
+                }
+            }
+            if (sobreposicao == 0) {
+                for (int a = 0; a < 3; a++) {
+                    Tabuleiro[linhaD1 + a][colunaD1 + a] = 3;
+                }
+            } else {
+                printf("\nSobreposição detectada para navio diagonal ↘!");
+            }
+        } else {
+            printf("\nNavio diagonal 1 fora dos limites (coluna)!");
+        }
+    } else {
+        printf("\nNavio diagonal 1 fora dos limites (linha)!");
+    }
+
+    // Navio diagonal 2 (secundária)
+    sobreposicao = 0;
+    if (linhaD2 + 3 <= 10) {
+        if (colunaD2 - (3 - 1) >= 0) {
+            for (int a = 0; a < 3; a++) {
+                if (Tabuleiro[linhaD2 + a][colunaD2 - a] != 0) {
+                    sobreposicao = 1;
+                }
+            }
+            if (sobreposicao == 0) {
+                for (int a = 0; a < 3; a++) {
+                    Tabuleiro[linhaD2 + a][colunaD2 - a] = 3;
+                }
+            } else {
+                printf("\nSobreposição detectada para navio diagonal 2!");
+            }
+        } else {
+            printf("\nNavio diagonal 2 fora dos limites (coluna)!");
+        }
+    } else {
+        printf("\nNavio diagonal 2 fora dos limites (linha)!");
+    }
 
 
   for (int i = 0; i < 10; i++)
