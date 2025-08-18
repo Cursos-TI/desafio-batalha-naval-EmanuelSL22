@@ -6,7 +6,7 @@
 
 int main() {
 
-    int Tabuleiro[10][10] = {0};
+   int Tabuleiro[10][10] = {0};
    int navio = 3;
    char vertical[10] = {'A','B','C','D','E','F','G','H','I','J'};
    int horizontal[10] = {1,2,3,4,5,6,7,8,9,10};
@@ -15,6 +15,7 @@ int main() {
    int linhaD1, colunaD1;
    int linhaD2, colunaD2;
    int sobreposicao = 0;
+   
 
    //coodernadas dos navios
    linhaH = 1;
@@ -118,6 +119,97 @@ if (colunaH + 3 <= 10)
     } else {
         printf("\nNavio diagonal 2 fora dos limites (linha)!");
     }
+
+  int cone[5][5] = {0};
+  int cruz[5][5] = {0};
+  int octaedro[5][5] = {0};
+  int tamanho = 5;
+  int centro = 2;
+
+  //matriz cone
+  for (int i = 0; i < tamanho; i++){
+    for (int j = 0; j < tamanho; j++){
+      if (i==0 && j==2) // topo do cone
+        cone[i][j] = 1;
+      else if (i==1 && (j>=1 && j<=3))
+        cone[i][j] = 1;
+      else if (i==2)
+        cone[i][j] = 1;
+      else
+        cone[i][j] = 0;
+    }
+  }
+
+  // matriz cruz
+  for (int i = 0; i < tamanho; i++){
+    for (int j = 0; j < tamanho; j++){
+      if (i == centro || j == centro)
+        cruz[i][j] = 1;
+      else
+        cruz[i][j] = 0;
+    }
+  }
+
+  //matriz octaedro
+  for (int i=0; i < tamanho; i++){
+    for (int j = 0; j < tamanho; j++){
+      int di = i - centro;
+      int dj = j - centro;
+      if ((di < 0) ? -di : di + (dj < 0 ? -dj : dj) <= 2) {
+        octaedro[i][j] = 1;
+      } else {
+        octaedro[i][j] = 0;
+      }
+    }
+  }
+
+  int origemLinha, origemColuna;
+  int offset = tamanho / 2;
+
+  origemLinha = 3;
+  origemColuna = 3;
+  for (int i=0; i<tamanho; i++){
+    for (int j=0; j<tamanho; j++){
+      int linha = origemLinha - offset + i;
+      int coluna = origemColuna - offset + j;
+      if (linha >=0 && linha < 10 && coluna >= 0 && coluna < 10){
+        if (cone[i][j] == 1 && Tabuleiro[linha][coluna] == 0){
+          Tabuleiro[linha][coluna] = 5; // Marca área da habilidade
+        }
+      }
+    }
+  }
+
+   
+  origemLinha = 6;
+  origemColuna = 6;
+  for (int i=0; i<tamanho; i++){
+    for (int j=0; j<tamanho; j++){
+      int linha = origemLinha - offset + i;
+      int coluna = origemColuna - offset + j;
+      if (linha >=0 && linha < 10 && coluna >= 0 && coluna < 10){
+        if (cruz[i][j] == 1 && Tabuleiro[linha][coluna] == 0){
+          Tabuleiro[linha][coluna] = 5;
+        }
+      }
+    }
+  }
+
+  
+  origemLinha = 8;
+  origemColuna = 2;
+  for (int i=0; i<tamanho; i++){
+    for (int j=0; j<tamanho; j++){
+      int linha = origemLinha - offset + i;
+      int coluna = origemColuna - offset + j;
+      if (linha >=0 && linha < 10 && coluna >= 0 && coluna < 10){
+        if (octaedro[i][j] == 1 && Tabuleiro[linha][coluna] == 0){
+          Tabuleiro[linha][coluna] = 5;
+        }
+      }
+    }
+  }
+
 
 
   for (int i = 0; i < 10; i++)
